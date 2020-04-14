@@ -20,7 +20,8 @@
 
     <modules>
         <module>SpringBootDemo</module>
-        <module>SpringBootDeme2</module>
+        <module>SpringBootDemo2</module>
+        <module>SpringBootEuraka</module>
     </modules>
 
     <properties>
