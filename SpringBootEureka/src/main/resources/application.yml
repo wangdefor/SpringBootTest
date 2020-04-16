@@ -1,0 +1,17 @@
+server:
+  port: 5060
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    ## 不注册自己
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: http://localhost2:5070/eureka/
+
+spring:
+  cloud:
+    loadbalancer:
+      ribbon:
+        enabled: false

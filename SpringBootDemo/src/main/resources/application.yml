@@ -1,2 +1,15 @@
 server:
   prot: 8089
+eureka:
+  instance:
+    hostname: demo
+    prefer-ip-address: true
+    instance-id: localhost:8090
+  client:
+    service-url:
+      defaultZone: http://localhost:5060/eureka/,http://localhost:5070/eureka/
+
+spring:
+  application:
+    name: SpringBootTest
+
