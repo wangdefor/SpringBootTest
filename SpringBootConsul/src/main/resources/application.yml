@@ -1,0 +1,26 @@
+server:
+  port: 8545
+
+
+#eureka:
+#  instance:
+#    hostname: demo
+#    prefer-ip-address: true
+#    instance-id: localhost:8090
+#  client:
+#    service-url:
+#      defaultZone: http://localhost:5060/eureka/,http://localhost:5070/eureka/
+
+spring:
+  application:
+    name: SpringBootTest
+  cloud:
+    consul:
+      discovery:
+        hostname: demo
+        preferIpAddress: true
+        ip-address: 127.0.0.1
+      host: 127.0.0.1
+      port: 8500
+
+

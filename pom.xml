@@ -23,6 +23,7 @@
         <module>SpringBootDemo2</module>
         <module>SpringBootEureka</module>
         <module>springBootEureka2</module>
+        <module>SpringBootConsul</module>
     </modules>
 
     <properties>
