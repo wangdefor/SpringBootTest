@@ -4,12 +4,12 @@ eureka:
   instance:
     hostname: demo
     prefer-ip-address: true
-    instance-id: localhost:8090
+    instance-id: localhost:8089
   client:
     service-url:
       defaultZone: http://localhost:5060/eureka/,http://localhost:5070/eureka/
 
 spring:
   application:
-    name: SpringBootTest
+    name: Spring-Boot-Client
 
