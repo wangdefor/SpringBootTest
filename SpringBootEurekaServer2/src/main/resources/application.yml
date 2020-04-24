@@ -1,10 +1,10 @@
 server:
-  port: 7045
+  port: 7007
 eureka:
   instance:
     hostname: demo
     prefer-ip-address: true
-    instance-id: localhost:8089
+    instance-id: localhost:7007
   client:
     service-url:
       defaultZone: http://localhost:5060/eureka/,http://localhost:5070/eureka/

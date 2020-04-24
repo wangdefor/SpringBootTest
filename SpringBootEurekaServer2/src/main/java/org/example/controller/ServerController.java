@@ -25,8 +25,8 @@ public class ServerController {
 
     @GetMapping(value = "/server/query/by/id")
     public ResponseModel<UserModel> queryById(@RequestParam(value = "id") Integer id){
-        System.out.println("server1");
-        return ResponseModel.ok(userService.queryById(2));
+        System.out.println("server2");
+        return ResponseModel.ok(userService.queryById(id));
     }
 
 }
