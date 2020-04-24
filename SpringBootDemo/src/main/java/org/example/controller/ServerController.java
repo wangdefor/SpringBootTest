@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * @ClassName ServerController
  * @Description 通过eureka来作为服务端给客户端调用调用
@@ -24,8 +26,9 @@ public class ServerController {
     private UserService userService;
 
     @GetMapping(value = "/server/query/by/id")
-    public ResponseModel<UserModel> queryById(@RequestParam(value = "id") Integer id){
+    public ResponseModel<UserModel> queryById(@RequestParam(value = "id") Integer id) throws InterruptedException {
         System.out.println("server1");
+        TimeUnit.SECONDS.sleep(15);
         return ResponseModel.ok(userService.queryById(2));
     }
 

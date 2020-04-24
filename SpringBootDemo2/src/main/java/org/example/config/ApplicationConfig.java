@@ -36,6 +36,7 @@ public class ApplicationConfig {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()
+                //扫描哪个服务下的包
                 .apis(RequestHandlerSelectors.basePackage("org.example"))
                 .paths(PathSelectors.any())
                 .build();

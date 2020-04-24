@@ -9,7 +9,6 @@ eureka:
     fetch-registry: false
     service-url:
       defaultZone: http://localhost:5060/eureka/
-
 spring:
   cloud:
     loadbalancer:
