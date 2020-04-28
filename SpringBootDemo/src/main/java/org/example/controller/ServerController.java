@@ -1,7 +1,7 @@
 package org.example.controller;
 
-import org.example.common.ResponseModel;
 import org.example.model.UserModel;
+import org.example.response.ResponseEntry;
 import org.example.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,10 +26,10 @@ public class ServerController {
     private UserService userService;
 
     @GetMapping(value = "/server/query/by/id")
-    public ResponseModel<UserModel> queryById(@RequestParam(value = "id") Integer id) throws InterruptedException {
+    public ResponseEntry<UserModel> queryById(@RequestParam(value = "id") Integer id) throws InterruptedException {
         System.out.println("server1");
         TimeUnit.SECONDS.sleep(15);
-        return ResponseModel.ok(userService.queryById(2));
+        return ResponseEntry.ok(userService.queryById(2));
     }
 
 }

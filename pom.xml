@@ -25,6 +25,9 @@
         <module>springBootEureka2</module>
         <module>SpringBootConsul</module>
         <module>SpringBootEurekaServer2</module>
+        <module>SpringBootHystrix</module>
+        <module>spring-gateway-demo</module>
+        <module>spring-common</module>
     </modules>
 
     <properties>
@@ -87,6 +90,12 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.explame.spring.boot</groupId>
+            <artifactId>spring-common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <optional>true</optional>
         </dependency>
     </dependencies>
 </project>

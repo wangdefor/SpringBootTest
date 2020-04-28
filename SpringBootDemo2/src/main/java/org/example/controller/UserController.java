@@ -1,6 +1,6 @@
 package org.example.controller;
 
-import org.example.common.ResponseModel;
+import org.example.response.ResponseEntry;
 import org.example.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,8 +23,8 @@ public class UserController {
     private UserService userService;
 
     @GetMapping(value = "/query/user/by/id")
-    public ResponseModel queryById(@RequestParam(value = "userId") Integer userId){
-        return ResponseModel.ok(userService.queryById(userId));
+    public ResponseEntry queryById(@RequestParam(value = "userId") Integer userId) {
+        return ResponseEntry.ok(userService.queryById(userId));
     }
 
 }

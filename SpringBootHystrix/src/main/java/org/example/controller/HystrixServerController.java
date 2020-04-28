@@ -1,7 +1,7 @@
 package org.example.controller;
 
 import org.example.response.ResponseEntry;
-import org.example.service.UserService;
+import org.example.service.HystrixTestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -9,21 +9,23 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * @ClassName UserController
- * @Date 2020/4/14 10:40
+ * @ClassName HystrixServerController
+ * @Description hystrixTestService
+ * @Date 2020/4/27 10:02
  * @Author wangyong
  * @Version 1.0
  **/
 @RestController
 @ResponseBody
-public class UserController {
+public class HystrixServerController {
 
     @Autowired
-    private UserService userService;
+    private HystrixTestService hystrixTestService;
 
-    @GetMapping(value = "/query/user/by/id")
-    public ResponseEntry queryById(@RequestParam(value = "userId") Integer userId) {
-        return ResponseEntry.ok(userService.queryById(userId));
+    @GetMapping("/test/hystrix/id")
+    public ResponseEntry<String> testHystrix(@RequestParam(value = "id") Integer id) throws InterruptedException {
+        return ResponseEntry.ok(hystrixTestService.hello(id));
     }
+
 
 }
