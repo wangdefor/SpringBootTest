@@ -1,0 +1,6 @@
+#spring:
+#  cloud:
+#    nacos:
+#      config:
+#        name: spring-client-demo.yaml
+#

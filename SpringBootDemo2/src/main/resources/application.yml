@@ -10,15 +10,15 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
   application:
     name: spring-client-demo
-eureka:
-  instance:
-    hostname: demo
-    prefer-ip-address: true
-    instance-id: localhost:8087
-  client:
-    service-url:
-      defaultZone: http://localhost:5060/eureka/,http://localhost:5070/eureka/
-    eureka-server-read-timeout-seconds: 4
+#eureka:
+#  instance:
+#    hostname: demo
+#    prefer-ip-address: true
+#    instance-id: localhost:8087
+#  client:
+#    service-url:
+#      defaultZone: http://localhost:5060/eureka/,http://localhost:5070/eureka/
+#    eureka-server-read-timeout-seconds: 4
 #mybatis的相关配置
 mybatis:
   #mapper配置文件
