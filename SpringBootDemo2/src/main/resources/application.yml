@@ -10,15 +10,16 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
   application:
     name: spring-client-demo
-#eureka:
-#  instance:
-#    hostname: demo
-#    prefer-ip-address: true
-#    instance-id: localhost:8087
-#  client:
-#    service-url:
-#      defaultZone: http://localhost:5060/eureka/,http://localhost:5070/eureka/
-#    eureka-server-read-timeout-seconds: 4
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://${AUTH_SERVICE_HOST:localhost}:7085/v1/authentication/jwks.json
 #mybatis的相关配置
 mybatis:
   #mapper配置文件
@@ -32,3 +33,71 @@ logging:
 ribbon:
   ReadTimeout: 5000
   ConnectTimeout: 5000
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: 'bus-refresh'
+  endpoint:
+    health:
+      show-details: always
+security:
+  oauth2:
+    client:
+      client-id: web_app
+      client-secret: $2a$10$S84wOzmAw4wqYBzAqNtmPOx1ZRWdDl9omm/W8T1hhW8S9EK2u57xG
+      access-token-uri: http://${AUTH_SERVICE_HOST:localhost}:${AUTH_SERVICE_PORT:7085}/oauth/token
+      user-authorization-uri: http://${AUTH_SERVICE_HOST:localhost}:${AUTH_SERVICE_PORT:7085}/oauth/authorize
+      grant-type: password
+      scope: read
+    resource:
+      user-info-uri: http://${AUTH_SERVICE_HOST:localhost}:${AUTH_SERVICE_PORT:8087}/user/info
+      prefer-token-info: true
+      jwt:
+        key-uri: http://${AUTH_SERVICE_HOST:localhost}:${AUTH_SERVICE_PORT:7085}/oauth/token_key
+        key-value: |
+          -----BEGIN PUBLIC KEY-----
+          MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAjxSawA+NUNmhB2ctiVnt
+          YH41WCNoD5STW2iPm5AIsKvm6X67lr6A88qOMRwx9oySdZnUnJ+8L3QJ51fkwuDe
+          ix5w9yA3f/7LUPWZU8M/7Oi+2nda05JMgU999TUlhTGsp9SPiBqq/iwuqMxU8xKu
+          F8bpTJTOpzrxH4e5BM6J/UJcOwDZLY6/3zP5w+tbhTvxjc995G4NtUyS4owE1MHe
+          lj8IJepknjePrE6nXD6ecdL401hstMY838UOOFiCnM8NpiBuNI0nY0qCbb9mhQZ+
+          7gP3jjM+Ft7R+MFTuEHWQ5UN8qHAPIT9UlLcu9IXdk6YwTsqNavwaTLUcP/ih9HB
+          6wIDAQAB
+          -----END PUBLIC KEY-----
+ignore:
+  urls:
+    - /
+    - /error
+    - /favicon.ico
+    - /**/*swagger*/**
+    - /v2/api-docs
+    - /csrf
+    - /actuator/**
+    - /hystrix.sender
+    - /v1/sms/**
+    - /v1/user/anonymousUser/**
+    - /v1/tenant/anonymousUser/**
+    - /v1/menu/anonymousUser/**
+    - /v1/examination/anonymousUser/**
+    - /v1/answer/anonymousUser/**
+    - /v1/examRecord/anonymousUser/**
+    - /v1/examRecord/currentTime
+    - /v1/subject/anonymousUser/**
+    - /v1/answer/anonymousUser/**
+    - /v1/code/**
+    - /v1/attachment/download
+    - /v1/log/**
+    - /authentication/**
+    - /v1/authentication/**
+    - /**/*.css
+    - /**/*.js
+    - /social
+    - /signin
+    - /signup
+    - /info
+    - /health
+    - /metrics/**
+    - /loggers/**

@@ -7,6 +7,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 //import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Import;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 
 /**
  * @ClassName App
@@ -21,6 +22,7 @@ import org.springframework.context.annotation.Import;
 @Import({
         ApplicationConfig.class,  // 引入 Swagger2 接口文档依赖
 })
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableFeignClients
 public class App {
 
