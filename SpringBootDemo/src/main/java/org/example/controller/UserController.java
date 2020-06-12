@@ -45,9 +45,10 @@ public class UserController {
         int userIds = RandomUtils.nextInt();
         System.out.println(userIds);
         //oder_id 由雪花算法生成唯一主键
-        String sql = "INSERT INTO t_order (user_id,category_id,board_name,layout_json)VALUES (" + 3 + ",1,1,1)";
+        String sql = "INSERT INTO t_order (user_id,category_id,board_name,layout_json)VALUES (" + userId + ",1,1,1)";
         PreparedStatement ps = conn.prepareStatement(sql);
         ps.executeUpdate();
+        System.out.println(2 % 3);
 //        String sql2 = "SELECT i.* FROM t_order o JOIN t_order_item i ON o.order_id=i.order_id WHERE o.order_id in (10, 11)";
 //        PreparedStatement ps2 = conn.prepareStatement(sql2);
 //        ResultSet rs = ps2.executeQuery();

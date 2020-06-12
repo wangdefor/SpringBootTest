@@ -2,6 +2,8 @@ package org.example.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.google.common.collect.Lists;
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.shardingsphere.driver.api.ShardingSphereDataSourceFactory;
 import org.apache.shardingsphere.sharding.api.config.ShardingRuleConfiguration;
@@ -11,9 +13,11 @@ import org.apache.shardingsphere.sharding.api.config.strategy.StandardShardingSt
 import org.apache.shardingsphere.sharding.api.sharding.standard.StandardShardingAlgorithm;
 import org.apache.shardingsphere.sharding.strategy.algorithm.keygen.SnowflakeKeyGenerateAlgorithm;
 import org.apache.shardingsphere.sharding.strategy.algorithm.sharding.inline.InlineShardingAlgorithm;
+import org.example.model.DataDynamicsSource;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -21,6 +25,7 @@ import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.util.Assert;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
@@ -43,6 +48,9 @@ public class MybatisConfig {
 
     private String mapperLocation = "classpath:mapper/*.xml";
     private String configLocation = "classpath:mybatis-config.xml";
+
+    @Autowired
+    private DataDynamicsSource dataDynamicsSource;
 
 //    @Bean
 //    @Primary
@@ -120,23 +128,30 @@ public class MybatisConfig {
     public DataSource getDataSource2() throws SQLException {
         // 配置真实数据源
         Map<String, DataSource> dataSourceMap = new HashMap<>();
-        // 配置第 1 个数据源
-        DruidDataSource dataSource1 = new DruidDataSource();
-        dataSource1.setDriverClassName("com.mysql.jdbc.Driver");
-        dataSource1.setUrl("jdbc:mysql://localhost:3306/test");
-        dataSource1.setUsername("root");
-        dataSource1.setPassword("12345");
-        dataSourceMap.put("ds0", dataSource1);
-
-
+        if (dataDynamicsSource != null && CollectionUtils.isNotEmpty(dataDynamicsSource.getDataModels())) {
+            dataDynamicsSource.getDataModels().forEach(model -> {
+                Boolean flag = StringUtils.isNotBlank(model.getPassword())
+                        && StringUtils.isNotBlank(model.getUrl())
+                        && StringUtils.isNotBlank(model.getUsername())
+                        && StringUtils.isNotBlank(model.getAlias());
+                Assert.isTrue(flag, "动态数据源配置不完整");
+                // 配置第 1 个数据源
+                DruidDataSource dataSource1 = new DruidDataSource();
+                dataSource1.setDriverClassName("com.mysql.jdbc.Driver");
+                dataSource1.setUrl(model.getUrl());
+                dataSource1.setUsername(model.getUsername());
+                dataSource1.setPassword(model.getPassword());
+                dataSourceMap.put(model.getAlias(), dataSource1);
+            });
+        }
         // 配置 t_order 表规则
-        ShardingTableRuleConfiguration orderTableRuleConfig = new ShardingTableRuleConfiguration("t_order", "ds${0..1}.t_order");
+        ShardingTableRuleConfiguration orderTableRuleConfig = new ShardingTableRuleConfiguration("t_order", "ds${0..2}.t_order");
 
         // 配置分库策略
         StandardShardingAlgorithm dbShardingAlgorithm = new InlineShardingAlgorithm();
         Properties dbProps = new Properties();
         //按user_id 取2的摸 来选择分库策略
-        dbProps.setProperty("algorithm.expression", "ds${user_id % 2}");
+        dbProps.setProperty("algorithm.expression", "ds${user_id % 3}");
         dbShardingAlgorithm.setProperties(dbProps);
         StandardShardingStrategyConfiguration dbShardingStrategyConfig = new StandardShardingStrategyConfiguration("user_id", dbShardingAlgorithm);
         orderTableRuleConfig.setDatabaseShardingStrategy(dbShardingStrategyConfig);

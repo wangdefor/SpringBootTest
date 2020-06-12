@@ -81,6 +81,12 @@
             <artifactId>shardingsphere-sharding-common</artifactId>
             <version>5.0.0-RC1-SNAPSHOT</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.purgeteam</groupId>
+            <artifactId>dynamic-config-spring-boot-starter</artifactId>
+            <version>0.1.0.RELEASE</version>
+        </dependency>
     </dependencies>
 
     <build>
