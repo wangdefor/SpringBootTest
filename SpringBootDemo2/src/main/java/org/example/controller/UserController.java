@@ -17,6 +17,9 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 //import org.springframework.security.jwt.crypto.sign.RsaVerifier;
 //import org.springframework.security.oauth2.common.OAuth2AccessToken;
 //import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
+//import org.springframework.security.oauth2.common.OAuth2AccessToken;
+//import org.springframework.security.oauth2.provider.token.TokenStore;
+//import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -47,14 +50,10 @@ public class UserController {
     @Value("${useLocalCache:false}")
     private boolean useLocalCache;
 
-//    @Autowired
-//    private JwtTokenStore jwtTokenStore;
-
     @GetMapping(value = "/query/user/by/id")
     public ResponseEntry queryById(
             @RequestHeader("Authorization") String tk,
             @RequestParam(value = "userId") Integer userId) {
-//        OAuth2AccessToken oAuth2AccessToken = jwtTokenStore.readAccessToken(tk.split(" ")[1]);
 //        Map<String, Object> information = oAuth2AccessToken.getAdditionalInformation();
 //        System.out.println(information);
 //        log.info(JSON.toJSONString(SecurityContextHolder.getContext().getAuthentication().getPrincipal()));
