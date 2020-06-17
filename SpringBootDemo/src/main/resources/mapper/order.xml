@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.mapper.OrderMapper">
+    <select id="queryById" resultType="org.example.model.OrderModel" parameterType="java.lang.Integer">
+        select user_id as userId,order_id as orderId
+          from t_order where user_id = #{0}
+    </select>
+
+</mapper>

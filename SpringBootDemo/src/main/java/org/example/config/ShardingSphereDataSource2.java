@@ -40,6 +40,7 @@ import java.util.logging.Logger;
 public class ShardingSphereDataSource2 extends AbstractUnsupportedOperationDataSource implements AutoCloseable {
 
 
+    @Getter
     private SchemaContexts schemaContexts;
 
     @Setter
