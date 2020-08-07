@@ -27,6 +27,7 @@
         <module>SpringBootHystrix</module>
         <module>spring-gateway-demo</module>
         <module>spring-common</module>
+        <module>Spring-boot-netty-server</module>
     </modules>
 
     <properties>

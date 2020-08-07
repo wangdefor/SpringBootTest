@@ -1,5 +1,5 @@
 server:
-  port: 7045
+  port: 111
 #eureka:
 #  instance:
 #    hostname: demo
@@ -11,5 +11,7 @@ server:
 
 spring:
   application:
-    name: spring-client-demo
+    name: Spring-Boot-Client
 
+netty:
+  port: 1245

@@ -7,7 +7,7 @@ spring:
     username: root
     password: 12345
     url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    driver-class-name: com.mysql.jdbc.Driver
   application:
     name: spring-client-demo
 
@@ -39,29 +39,6 @@ management:
   endpoint:
     health:
       show-details: always
-security:
-  oauth2:
-    client:
-      client-id: web_app
-      client-secret: spring-microservice-exam-secret
-      access-token-uri: http://${AUTH_SERVICE_HOST:localhost}:${AUTH_SERVICE_PORT:7085}/oauth/token
-      user-authorization-uri: http://${AUTH_SERVICE_HOST:localhost}:${AUTH_SERVICE_PORT:7085}/oauth/authorize
-      grant-type: password
-      scope: read
-    resource:
-      user-info-uri: http://${AUTH_SERVICE_HOST:localhost}:${AUTH_SERVICE_PORT:7085}/user/info
-      prefer-token-info: false
-      jwt:
-        key-value: |
-          -----BEGIN PUBLIC KEY-----
-          MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAkRS
-          ja1FCanSuS9koeBKhoaX3Xqof7n0V5oVAshtwcMwAlz0h06f3pdjJJgiolI1Ae
-          6dilzjPDUENpqKH8HWW9cQjEGIAqEfQg1DeLOiew64QjuxLiNdkcAMcuG0fRVMD
-          Xr9xCG3QC6rPRCVIc/jjdRFGaBHQPB3ncg70LItn1ciVY8sKg09CcEIRWQcGrXZJoUZaY
-          k6e29KkGVJg26PzCXNqv7kDpyLgm01xIE6bieMHz8fPd9sLeTxupDAJvgjsLzx0AJFDMaD4Yx
-          VD9p8+/tRKUQy2RHocq3zwvrkWR0X3e+7iHU7k0rlJNQdomVtZgL7ILUN0IbrVzSxnc5r6jwIDAQAB
-          -----END PUBLIC KEY-----
-      token-info-uri: http://${AUTH_SERVICE_HOST:localhost}:${AUTH_SERVICE_PORT:7085}/oauth/check_token
 
 ignore:
   urls:
