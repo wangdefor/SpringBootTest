@@ -26,6 +26,8 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+    
+    private static int count = 0;
 
     @GetMapping(value = "/query/user/by/id")
     public ResponseEntry getQueryById(@RequestParam(value = "userId") String userId) throws SQLException {
@@ -45,5 +47,28 @@ public class UserController {
         return ResponseEntry.ok(userService.queryOrderById(userId));
     }
 
+    @GetMapping(value = "/before/test/user/query")
+    public ResponseEntry beforeQuery(@RequestParam(value = "userId") Integer userId) throws SQLException {
+        log.info("------- 我是demo1，正在测试predicate before， userId = {}---------------------------", userId);
+        return ResponseEntry.ok(userService.queryOrderById(userId));
+    }
 
+    @GetMapping(value = "/after/test/user/query")
+    public ResponseEntry afterQuery(@RequestParam(value = "userId") Integer userId) throws SQLException {
+        log.info("------- 我是demo1，正在测试predicate after， userId = {}---------------------------", userId);
+        return ResponseEntry.ok(userService.queryOrderById(userId));
+    }
+
+    @GetMapping(value = "/between/test/user/query")
+    public ResponseEntry betweenQuery(@RequestParam(value = "userId") Integer userId) throws SQLException {
+        log.info("------- 我是demo1，正在测试predicate between， userId = {}---------------------------", userId);
+        return ResponseEntry.ok(userService.queryOrderById(userId));
+    } ///weight/query/user/by/** 
+
+    @GetMapping(value = "/weight/query/user/by/query")
+    public ResponseEntry weightQuery(@RequestParam(value = "userId") Integer userId) throws SQLException {
+        count = count + 1;
+        log.info("------- 我是demo1，正在测试predicate weight, 调用次数为 {}， userId = {}---------------------------", count,userId);
+        return ResponseEntry.ok(userService.queryOrderById(userId));
+    }
 }

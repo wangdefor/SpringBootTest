@@ -29,9 +29,9 @@ import java.sql.SQLException;
 @MapperScan(basePackages = "org.example.mapper")
 public class MybatisConfig {
 
-    private String url = "jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC";
-    private String userName = "root";
-    private String password = "12345";
+    private String url = "jdbc:mysql://10.0.2.8:3306/ways";
+    private String userName = "cimendev";
+    private String password = "123456";
 
     private String mapperLocation = "classpath:mapper/*.xml";
     private String configLocation = "classpath:mybatis-config.xml";

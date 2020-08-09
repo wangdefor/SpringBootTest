@@ -23,6 +23,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 //import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.SQLException;
 import java.util.Map;
 
 /**
@@ -41,6 +42,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    private static int count = 0;
 
     @GetMapping(value = "/query/user/by/id")
     public ResponseEntry queryById(
@@ -56,4 +58,10 @@ public class UserController {
     }
 
 
+    @GetMapping(value = "/weight/query/user/by/query")
+    public ResponseEntry weightQuery(@RequestParam(value = "userId") Integer userId) throws SQLException {
+        count = count + 1;
+        log.info("------- 我是demo1，正在测试predicate weight, 调用次数为{} ， userId = {}---------------------------", count,userId);
+        return ResponseEntry.ok(Boolean.TRUE);
+    }
 }

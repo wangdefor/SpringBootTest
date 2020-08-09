@@ -5,8 +5,8 @@ server:
 spring:
   datasource:
     username: root
-    password: 12345
-    url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
+    password: Cimen#123
+    url: jdbc:mysql://10.0.2.8:3306/ways
     driver-class-name: com.mysql.jdbc.Driver
   application:
     name: spring-client-demo
